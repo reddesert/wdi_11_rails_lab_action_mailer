@@ -12,16 +12,15 @@
 
     root to: 'greeting#index'
 
-#####config/environment.rb
+#####config/environments/development.rb
 
     ActionMailer::Base.smtp_settings = {
-      :user_name => 'your_email@gmail.com',
-      :password => 'your_password',
-      :domain => 'whatever_or_your_actual_domain',
-      :address => 'smtp.gmail.com',
-      :port => 587,
-      :authentication => :plain,
-      :enable_starttls_auto => true
+      user_name: ENV["GMAIL_ACCOUNT"],
+      password: ENV["GMAIL_PASSWORD"],
+      address: 'smtp.gmail.com', # Assuming Gmail
+      port: 587,
+      authentication: :plain,
+      enable_starttls_auto: true
     }
 
 Note: best practice here is to store the email and password into environmental variables in a .env file that you create in the Rails root directory - the above is just the quick and dirty way
