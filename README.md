@@ -61,8 +61,13 @@ Make your own contact form, similar to the one above. It should have all of the 
 * Subject
 * Content
 
-Bonus 1 - Research [SendGrid](http://sendgrid.com/). What is it, and why should we use it instead of Gmail?
-Bonus 2 - Research [Pony](https://github.com/benprew/pony). What is this Gem and why might we want to use it? What are the downsides to using it? 
+#### Bonus 1 
+
+Research [SendGrid](http://sendgrid.com/). What is it, and why should we use it instead of Gmail?
+
+#### Bonus 2 
+
+Research [Pony](https://github.com/benprew/pony). What is this Gem and why might we want to use it? What are the downsides to using it? 
 
 
 
