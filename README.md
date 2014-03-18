@@ -6,45 +6,50 @@
 
 ### Demo
 
-rails g scaffold Greeting email:text content:text
+    rails g scaffold Greeting email:text content:text
 
 #####config/routes.rb
-root to: 'greeting#index'
+
+    root to: 'greeting#index'
 
 #####config/environment.rb
-ActionMailer::Base.smtp_settings = {
-  :user_name => 'your_email@gmail.com',
-  :password => 'your_password',
-  :domain => 'whatever_or_your_actual_domain',
-  :address => 'smtp.gmail.com',
-  :port => 587,
-  :authentication => :plain,
-  :enable_starttls_auto => true
-}
+
+    ActionMailer::Base.smtp_settings = {
+      :user_name => 'your_email@gmail.com',
+      :password => 'your_password',
+      :domain => 'whatever_or_your_actual_domain',
+      :address => 'smtp.gmail.com',
+      :port => 587,
+      :authentication => :plain,
+      :enable_starttls_auto => true
+    }
 
 Note: best practice here is to store the email and password into environmental variables in a .env file that you create in the Rails root directory - the above is just the quick and dirty way
 
-touch app/mailers/notifier.rb
-touch app/views/notifier/greeting_notification.text.erb
+    touch app/mailers/notifier.rb
+    touch app/views/notifier/greeting_notification.text.erb
 
 (shortcut: rails g mailer Notifier)
 
 ##### app/mailers/notifier.rb
-class Notifier < ActionMailer::Base
-  def greeting_notification(form_input)
-    mail(to: "someone@gmail.com", from: form_input.email, subject: "New message from #{form_input.email}")
-  end
-end
+
+    class Notifier < ActionMailer::Base
+      def greeting_notification(form_input)
+        mail(to: "someone@gmail.com", from: form_input.email, subject: "New message from #{form_input.email}")
+      end
+    end
 
 ##### app/views/notifier/greeting_notification.text.erb
-Message from <%= @greeting.email %>
-<%= @greeting.content %>
+
+    Message from <%= @greeting.email %>
+    <%= @greeting.content %>
 
 ##### app/models/greeting.rb
-after_commit :send_notification
-def send_notification
-  Notifier.greeting_notification(self).deliver
-end
+
+    after_commit :send_notification
+    def send_notification
+      Notifier.greeting_notification(self).deliver
+    end
 
 
 ### Lab
@@ -56,7 +61,8 @@ Make your own contact form, similar to the one above. It should have all of the 
 * Subject
 * Content
 
-Bonus: research SendGrid. What is it, and why should we use it instead of Gmail?
+Bonus 1 - Research [SendGrid](http://sendgrid.com/). What is it, and why should we use it instead of Gmail?
+Bonus 2 - Research [Pony](https://github.com/benprew/pony). What is this Gem and why might we want to use it? What are the downsides to using it? 
 
 
 
